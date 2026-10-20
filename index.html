@@ -183,6 +183,202 @@
         font-size: 14px;
       }
 
+      .saved-heading {
+        align-items: center;
+      }
+
+      .primary-button,
+      .secondary-button,
+      .delete-button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 10px;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary-button {
+        padding: 0 17px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #fff;
+      }
+
+      .primary-button:hover {
+        border-color: var(--green-light);
+        background: var(--green-light);
+      }
+
+      .secondary-button {
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .secondary-button:hover {
+        border-color: #b6d0bd;
+      }
+
+      .flight-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin: 0 0 20px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .flight-form[hidden] {
+        display: none;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .form-field-wide,
+      .form-actions,
+      .form-message {
+        grid-column: 1 / -1;
+      }
+
+      .form-field label {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .form-field input {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #d9ded5;
+        border-radius: 9px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        font-size: 14px;
+      }
+
+      .form-field input:focus {
+        border-color: var(--green-light);
+        outline: 3px solid rgb(13 89 71 / 13%);
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .form-message {
+        margin: 0;
+        color: #a12e25;
+        font-size: 13px;
+      }
+
+      .form-message:empty {
+        display: none;
+      }
+
+      .saved-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .saved-flight {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .saved-route {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--green);
+        font-size: 17px;
+        font-weight: 750;
+        overflow-wrap: anywhere;
+      }
+
+      .route-arrow {
+        flex: 0 0 auto;
+        color: #9aaa9e;
+      }
+
+      .saved-dates {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+
+      .saved-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .open-flight-link {
+        display: inline-flex;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 0 14px;
+        border-radius: 9px;
+        background: #edf4eb;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .open-flight-link:hover {
+        background: #e2eee0;
+      }
+
+      .delete-button {
+        min-height: 40px;
+        padding: 0 10px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: #8a4b43;
+        font-size: 13px;
+      }
+
+      .delete-button:hover {
+        border-color: #f0d9d5;
+        background: #fff8f7;
+      }
+
+      .empty-state {
+        padding: 23px;
+        border: 1px dashed #cfd8cc;
+        border-radius: 14px;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+      }
+
       .tracker-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -349,6 +545,23 @@
           margin-top: 40px;
         }
 
+        .saved-heading {
+          align-items: center;
+        }
+
+        .flight-form,
+        .saved-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .flight-form {
+          padding: 18px;
+        }
+
+        .saved-flight {
+          padding: 18px;
+        }
+
         .tracker-grid {
           grid-template-columns: 1fr;
           gap: 12px;
@@ -423,6 +636,45 @@
         </div>
       </section>
 
+      <section aria-labelledby="saved-title">
+        <div class="section-heading saved-heading">
+          <div>
+            <h2 id="saved-title">My flight searches</h2>
+            <p>Keep your favorite Google Flights searches close.</p>
+          </div>
+          <button class="primary-button" id="add-flight-button" type="button" aria-expanded="false" aria-controls="flight-form">
+            <span aria-hidden="true">＋</span> Add flight
+          </button>
+        </div>
+
+        <form class="flight-form" id="flight-form" hidden>
+          <div class="form-field">
+            <label for="departure">Departure airport or city</label>
+            <input id="departure" name="departure" type="text" autocomplete="off" required>
+          </div>
+          <div class="form-field">
+            <label for="destination">Destination airport or city</label>
+            <input id="destination" name="destination" type="text" autocomplete="off" required>
+          </div>
+          <div class="form-field">
+            <label for="departure-date">Departure date</label>
+            <input id="departure-date" name="departureDate" type="date" required>
+          </div>
+          <div class="form-field">
+            <label for="return-date">Return date</label>
+            <input id="return-date" name="returnDate" type="date" required>
+          </div>
+          <p class="form-message" id="form-message" role="alert"></p>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Save flight</button>
+            <button class="secondary-button" id="cancel-flight-button" type="button">Cancel</button>
+          </div>
+        </form>
+
+        <p class="form-message" id="storage-message" role="alert" hidden></p>
+        <div class="saved-grid" id="saved-flights" aria-live="polite"></div>
+      </section>
+
       <section id="trackers" aria-labelledby="trackers-title">
         <div class="section-heading">
           <div>
@@ -487,5 +739,209 @@
       <span class="footer-note"><span aria-hidden="true">✦</span> Made for curious travelers, with a little Brazil in the details.</span>
       <span>Flight data and tracking provided by linked services.</span>
     </footer>
+    <script>
+      const storageKey = "voa-brasil-flights";
+      const flightForm = document.querySelector("#flight-form");
+      const addFlightButton = document.querySelector("#add-flight-button");
+      const cancelFlightButton = document.querySelector("#cancel-flight-button");
+      const savedFlights = document.querySelector("#saved-flights");
+      const formMessage = document.querySelector("#form-message");
+      const storageMessage = document.querySelector("#storage-message");
+      const departureDateInput = document.querySelector("#departure-date");
+      const returnDateInput = document.querySelector("#return-date");
+      let flights = [];
+
+      function buildGoogleFlightsUrl(departure, destination, departureDate, returnDate) {
+        const url = new URL("https://www.google.com/travel/flights/search");
+        url.searchParams.set(
+          "q",
+          `Flights from ${departure} to ${destination} departing ${departureDate} returning ${returnDate}`
+        );
+        return url.href;
+      }
+
+      function isGoogleFlightsUrl(value) {
+        try {
+          const url = new URL(value);
+          return url.protocol === "https:"
+            && (url.hostname === "google.com" || url.hostname.endsWith(".google.com"))
+            && url.pathname.startsWith("/travel/flights");
+        } catch {
+          return false;
+        }
+      }
+
+      function showStorageError() {
+        storageMessage.textContent = "Your browser couldn't save this flight. Check that local storage is available and try again.";
+        storageMessage.hidden = false;
+      }
+
+      function saveFlights(nextFlights) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(nextFlights));
+          flights = nextFlights;
+          storageMessage.hidden = true;
+          storageMessage.textContent = "";
+          return true;
+        } catch {
+          showStorageError();
+          return false;
+        }
+      }
+
+      function createFlightCard(flight, index) {
+        const card = document.createElement("article");
+        card.className = "saved-flight";
+
+        const details = document.createElement("div");
+        const route = document.createElement("div");
+        route.className = "saved-route";
+
+        const departure = document.createElement("span");
+        departure.textContent = flight.departure;
+        const arrow = document.createElement("span");
+        arrow.className = "route-arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+        const destination = document.createElement("span");
+        destination.textContent = flight.destination;
+        route.append(departure, arrow, destination);
+
+        const dates = document.createElement("p");
+        dates.className = "saved-dates";
+        dates.textContent = flight.dates;
+        details.append(route, dates);
+
+        const actions = document.createElement("div");
+        actions.className = "saved-actions";
+        const openLink = document.createElement("a");
+        openLink.className = "open-flight-link";
+        openLink.href = flight.googleUrl;
+        openLink.target = "_blank";
+        openLink.rel = "noopener noreferrer";
+        openLink.textContent = "Open Google Flights ↗";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+        deleteButton.setAttribute("aria-label", `Delete flight from ${flight.departure} to ${flight.destination}`);
+        deleteButton.addEventListener("click", () => {
+          const nextFlights = flights.filter((_, flightIndex) => flightIndex !== index);
+          if (saveFlights(nextFlights)) {
+            renderFlights();
+          }
+        });
+
+        actions.append(openLink, deleteButton);
+        card.append(details, actions);
+        return card;
+      }
+
+      function renderFlights() {
+        savedFlights.replaceChildren();
+        if (flights.length === 0) {
+          const emptyState = document.createElement("p");
+          emptyState.className = "empty-state";
+          emptyState.textContent = "No saved flights yet. Add a search to keep it here.";
+          savedFlights.append(emptyState);
+          return;
+        }
+
+        flights.forEach((flight, index) => {
+          savedFlights.append(createFlightCard(flight, index));
+        });
+      }
+
+      function closeForm() {
+        flightForm.hidden = true;
+        addFlightButton.setAttribute("aria-expanded", "false");
+        formMessage.textContent = "";
+      }
+
+      addFlightButton.addEventListener("click", () => {
+        flightForm.hidden = !flightForm.hidden;
+        addFlightButton.setAttribute("aria-expanded", String(!flightForm.hidden));
+        formMessage.textContent = "";
+        if (!flightForm.hidden) {
+          document.querySelector("#departure").focus();
+        }
+      });
+
+      cancelFlightButton.addEventListener("click", () => {
+        flightForm.reset();
+        closeForm();
+        addFlightButton.focus();
+      });
+
+      function validateReturnDate() {
+        returnDateInput.setCustomValidity(
+          departureDateInput.value
+            && returnDateInput.value
+            && returnDateInput.value < departureDateInput.value
+            ? "Return date must be on or after the departure date."
+            : ""
+        );
+      }
+
+      departureDateInput.addEventListener("input", validateReturnDate);
+      returnDateInput.addEventListener("input", validateReturnDate);
+
+      flightForm.addEventListener("reset", () => {
+        returnDateInput.setCustomValidity("");
+      });
+
+      flightForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        formMessage.textContent = "";
+
+        if (!flightForm.reportValidity()) {
+          return;
+        }
+
+        const formData = new FormData(flightForm);
+        const departure = String(formData.get("departure")).trim();
+        const destination = String(formData.get("destination")).trim();
+        const departureDate = String(formData.get("departureDate"));
+        const returnDate = String(formData.get("returnDate"));
+        const flight = {
+          departure,
+          destination,
+          dates: `${departureDate} → ${returnDate}`,
+          googleUrl: buildGoogleFlightsUrl(departure, destination, departureDate, returnDate)
+        };
+        const nextFlights = [...flights, flight];
+
+        if (saveFlights(nextFlights)) {
+          renderFlights();
+          flightForm.reset();
+          closeForm();
+          addFlightButton.focus();
+        }
+      });
+
+      try {
+        const storedFlights = localStorage.getItem(storageKey);
+        if (storedFlights) {
+          const parsedFlights = JSON.parse(storedFlights);
+          if (!Array.isArray(parsedFlights)) {
+            throw new Error("Saved flights must be a list.");
+          }
+          flights = parsedFlights.filter((flight) =>
+            flight
+            && typeof flight.departure === "string"
+            && typeof flight.destination === "string"
+            && typeof flight.dates === "string"
+            && typeof flight.googleUrl === "string"
+            && isGoogleFlightsUrl(flight.googleUrl)
+          );
+        }
+      } catch {
+        storageMessage.textContent = "Saved flights couldn't be loaded. Your browser storage may be unavailable or contain invalid data.";
+        storageMessage.hidden = false;
+      }
+
+      renderFlights();
+    </script>
   </body>
 </html>
